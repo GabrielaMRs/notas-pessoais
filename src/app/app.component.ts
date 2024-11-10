@@ -1,13 +1,29 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'notas-pessoais';
+  novaNota = {
+    id: 0,
+    titulo: '',
+    conteudo: '',
+    dataCriacao: new Date()
+  };
+
+  notas: any[] = []; // Array para armazenar as notas
+
+  adicionarNota() {
+    // Lógica para adicionar a nova nota à lista de notas
+    this.notas.push(this.novaNota);
+    // Reiniciar o formulário
+    this.novaNota = { id: 0, titulo: '', conteudo: '', dataCriacao: new Date() };
+  }
+
+  remover(id: number) {
+    // Remover a nota com o ID especificado
+    this.notas = this.notas.filter(nota => nota.id !== id);
+  }
 }

@@ -1,0 +1,23 @@
+
+<ul>
+  <li *ngFor="let note of notes; let i = index">
+    {{ note.title }} - {{ note.content }}
+    <button (click)="edit(i)">Editar</button>
+    <button (click)="delete(i)">Excluir</button>
+  </li>
+</ul>
+
+
+<div *ngIf="noteToEdit">
+  <h2>Editar Nota</h2>
+  <form (ngSubmit)="saveEdit()">
+    <label for="title">Título:</label>
+    <input id="title" [(ngModel)]="noteToEdit.title" name="title" required />
+
+    <label for="content">Conteúdo:</label>
+    <textarea id="content" [(ngModel)]="noteToEdit.content" name="content" required></textarea>
+
+    <button type="submit">Salvar</button>
+    <button type="button" (click)="noteToEdit = null">Cancelar</button>
+  </form>
+</div>
