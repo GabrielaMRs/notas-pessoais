@@ -1,23 +1,25 @@
+<div class="note-list">
+  <div class="note-card" *ngFor="let note of notes; let i = index">
+    <div class="note-card-title">{{ note.title }}</div>
+    <div class="note-card-content">{{ note.content }}</div>
+    <div class="note-card-buttons">
+      <button class="edit-btn" (click)="edit(i)">Editar</button>
+      <button class="delete-btn" (click)="delete(i)">Excluir</button>
+    </div>
 
-<ul>
-  <li *ngFor="let note of notes; let i = index">
-    {{ note.title }} - {{ note.content }}
-    <button (click)="edit(i)">Editar</button>
-    <button (click)="delete(i)">Excluir</button>
-  </li>
-</ul>
+    <!-- Formulário de edição (exibido se a nota estiver em modo de edição) -->
+    <div *ngIf="noteToEdit?.id === note.id" class="note-edit-form">
+      <h3>Editar Nota</h3>
+      <form (ngSubmit)="saveEdit()">
+        <label for="edit-title">Título:</label>
+        <input id="edit-title" type="text" [(ngModel)]="noteToEdit.title" name="title" required />
 
+        <label for="edit-content">Conteúdo:</label>
+        <textarea id="edit-content" [(ngModel)]="noteToEdit.content" name="content" required></textarea>
 
-<div *ngIf="noteToEdit">
-  <h2>Editar Nota</h2>
-  <form (ngSubmit)="saveEdit()">
-    <label for="title">Título:</label>
-    <input id="title" [(ngModel)]="noteToEdit.title" name="title" required />
-
-    <label for="content">Conteúdo:</label>
-    <textarea id="content" [(ngModel)]="noteToEdit.content" name="content" required></textarea>
-
-    <button type="submit">Salvar</button>
-    <button type="button" (click)="noteToEdit = null">Cancelar</button>
-  </form>
+        <button type="submit" class="edit-save-btn">Salvar</button>
+        <button type="button" class="edit-cancel-btn" (click)="cancelEdit()">Cancelar</button>
+      </form>
+    </div>
+  </div>
 </div>

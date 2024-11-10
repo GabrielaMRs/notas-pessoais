@@ -4,6 +4,7 @@ import { NoteService } from '../note.service';
 @Component({
   selector: 'app-note-list',
   templateUrl: './note-list.component.html',
+  styleUrls: ['./note-list.component.css']
 })
 export class NoteListComponent implements OnInit {
   notes: any[] = [];
@@ -29,6 +30,11 @@ export class NoteListComponent implements OnInit {
   edit(index: number) {
     this.noteToEdit = { ...this.notes[index] };  // Clonar a nota para edição
     console.log(`Editando a nota no índice ${index}`, this.noteToEdit);
+  }
+
+
+  cancelEdit() {
+    this.noteToEdit = null;  // Redefine a nota em edição para cancelar
   }
 
   // Método para salvar a nota editada

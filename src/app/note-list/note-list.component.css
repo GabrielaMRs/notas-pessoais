@@ -1,0 +1,197 @@
+
+.note-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 20px;
+  justify-content: center;
+}
+
+.note-card {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  padding: 20px;
+  color: #333;
+  font-family: Arial, sans-serif;
+  transition: transform 0.2s ease;
+}
+
+.note-card:hover {
+  transform: translateY(-5px);
+}
+
+.note-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.note-card-content {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.note-card-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.note-card button {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.note-card .edit-btn {
+  background-color: #007bff;
+}
+
+.note-card .edit-btn:hover {
+  background-color: #0056b3;
+}
+
+.note-card .delete-btn {
+  background-color: #dc3545;
+}
+
+.note-card .delete-btn:hover {
+  background-color: #c82333;
+}
+
+.note-card:nth-child(5n+1) {
+  background-color: #ffebee; /* Rosa claro */
+}
+
+.note-card:nth-child(5n+2) {
+  background-color: #e3f2fd; /* Azul claro */
+}
+
+.note-card:nth-child(5n+3) {
+  background-color: #e8f5e9; /* Verde claro */
+}
+
+.note-card:nth-child(5n+4) {
+  background-color: #fff3e0; /* Laranja claro */
+}
+
+.note-card:nth-child(5n+5) {
+  background-color: #f3e5f5; /* Roxo claro */
+}
+
+
+
+@media (max-width: 768px) {
+  .note-list {
+    justify-content: center;
+  }
+
+  .note-card {
+    width: 100%;
+    max-width: 300px;
+  }
+  .note-edit-form input[type="text"],
+  .note-edit-form textarea {
+    font-size: 16px;
+  }
+
+  .note-edit-form .edit-save-btn,
+  .note-edit-form .edit-cancel-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+/* Contêiner do formulário de edição dentro do card */
+.note-edit-form {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Título do formulário de edição */
+.note-edit-form h3 {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Estilos para os campos de entrada e área de texto */
+.note-edit-form input[type="text"],
+.note-edit-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.note-edit-form input[type="text"]:focus,
+.note-edit-form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.note-edit-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Botões do formulário */
+.note-edit-form .edit-save-btn,
+.note-edit-form .edit-cancel-btn {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 8px;
+}
+
+/* Botão de salvar */
+.note-edit-form .edit-save-btn {
+  background-color: #28a745;
+}
+
+.note-edit-form .edit-save-btn:hover {
+  background-color: #218838;
+}
+
+/* Botão de cancelar */
+.note-edit-form .edit-cancel-btn {
+  background-color: #dc3545;
+}
+
+.note-edit-form .edit-cancel-btn:hover {
+  background-color: #c82333;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .note-edit-form input[type="text"],
+  .note-edit-form textarea {
+    font-size: 16px;
+  }
+
+  .note-edit-form .edit-save-btn,
+  .note-edit-form .edit-cancel-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
