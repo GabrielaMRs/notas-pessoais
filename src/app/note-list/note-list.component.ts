@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NoteService } from '../note.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-note-list',
@@ -8,11 +9,18 @@ import { NoteService } from '../note.service';
 })
 export class NoteListComponent implements OnInit {
   notes: any[] = [];
-  filteredNotes: any[] = []; // Notas filtradas
-  searchTerm: string = '';    // Termo de pesquisa
-  noteToEdit: any = null;  // Variável para armazenar a nota que será editada
+  filteredNotes: any[] = [];
+  searchTerm: string = '';
+  noteToEditIndex: number | null = null;  // Índice da nota em edição
+  addNoteForm: FormGroup;
 
-  constructor(private noteService: NoteService) {}
+  constructor(private noteService: NoteService, private fb: FormBuilder) {
+    this.addNoteForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(3)]],
+      content: ['', [Validators.required, Validators.minLength(5)]]
+    });
+  }
+
 
   ngOnInit() {
     this.loadNotes();
@@ -23,31 +31,26 @@ export class NoteListComponent implements OnInit {
     this.filteredNotes = this.notes;
   }
 
-  // Método para excluir uma nota
   delete(index: number) {
     this.noteService.delete(index);
-    this.loadNotes();  // Recarregar a lista após exclusão
+    this.loadNotes();
     this.filterNotes();
   }
 
-  // Método para iniciar a edição de uma nota
+  // Função para iniciar a edição da nota com o índice específico
   edit(index: number) {
-    this.noteToEdit = { ...this.notes[index] };  // Clonar a nota para edição
-    console.log(`Editando a nota no índice ${index}`, this.noteToEdit);
+    this.noteToEditIndex = index;
   }
-
 
   cancelEdit() {
-    this.noteToEdit = null;  // Redefine a nota em edição para cancelar
+    this.noteToEditIndex = null; // Cancela a edição
   }
 
-  // Método para salvar a nota editada
   saveEdit() {
-    const index = this.notes.findIndex(note => note.id === this.noteToEdit.id);
-    if (index !== -1) {
-      this.noteService.update(index, this.noteToEdit);  // Atualizar a nota no serviço
-      this.loadNotes();  // Recarregar a lista após a atualização
-      this.noteToEdit = null;  // Limpar a nota em edição
+    if (this.noteToEditIndex !== null) {
+      this.noteService.update(this.noteToEditIndex, this.filteredNotes[this.noteToEditIndex]);
+      this.loadNotes();
+      this.noteToEditIndex = null;
     }
   }
 
@@ -58,7 +61,7 @@ export class NoteListComponent implements OnInit {
         note.content.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     } else {
-      this.filteredNotes = this.notes; // Exibe todas se o termo de pesquisa estiver vazio
+      this.filteredNotes = this.notes;
     }
   }
 }

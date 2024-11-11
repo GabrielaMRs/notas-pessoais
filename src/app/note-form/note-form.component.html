@@ -1,7 +1,26 @@
+<form [formGroup]="noteForm" (ngSubmit)="addNote()">
+  <label for="title">Título da Nota:</label>
+  <input
+    id="title"
+    type="text"
+    formControlName="title"
+    placeholder="Título da Nota"
+  />
+  <div *ngIf="noteForm.get('title')?.invalid && noteForm.get('title')?.touched" class="error-message">
+    <span *ngIf="noteForm.get('title')?.errors?.['required']">O título é obrigatório.</span>
+    <span *ngIf="noteForm.get('title')?.errors?.['minlength']">O título deve ter pelo menos 3 caracteres.</span>
+  </div>
 
+  <label for="content">Conteúdo da Nota:</label>
+  <textarea
+    id="content"
+    formControlName="content"
+    placeholder="Conteúdo da Nota"
+  ></textarea>
+  <div *ngIf="noteForm.get('content')?.invalid && noteForm.get('content')?.touched" class="error-message">
+    <span *ngIf="noteForm.get('content')?.errors?.['required']">O conteúdo é obrigatório.</span>
+    <span *ngIf="noteForm.get('content')?.errors?.['minlength']">O conteúdo deve ter pelo menos 5 caracteres.</span>
+  </div>
 
-<form (ngSubmit)="addNote()">
-  <input type="text" [(ngModel)]="note.title" name="title" placeholder="Título da Nota" required />
-  <textarea [(ngModel)]="note.content" name="content" placeholder="Conteúdo da Nota" required></textarea>
-  <button type="submit">Adicionar Nota</button>
+  <button type="submit" [disabled]="noteForm.invalid">Adicionar Nota</button>
 </form>
