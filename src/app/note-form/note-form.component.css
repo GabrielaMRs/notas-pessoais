@@ -77,7 +77,7 @@ button[type="button"]:hover {
 .error-message {
   color: red;
   font-size: 12px;
-  margin-top: 4px;
+  margin: 4px 0 8px 0;
 }
 
 /* Responsividade */
