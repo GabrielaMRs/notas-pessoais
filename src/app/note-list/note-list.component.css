@@ -181,6 +181,42 @@
   background-color: #c82333;
 }
 
+.filter-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.filter-container input {
+  padding: 8px;
+  width: 80%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.filter-container button {
+  padding: 8px 16px;
+  margin-left: 5px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.filter-container button:hover {
+  background-color: #45a049;
+}
+
+.no-results-message {
+  text-align: center;
+  font-size: 16px;
+  color: #777;
+  margin-top: 20px;
+}
+
 /* Responsividade para telas menores */
 @media (max-width: 768px) {
   .note-edit-form input[type="text"],

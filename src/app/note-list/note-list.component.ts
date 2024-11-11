@@ -8,6 +8,8 @@ import { NoteService } from '../note.service';
 })
 export class NoteListComponent implements OnInit {
   notes: any[] = [];
+  filteredNotes: any[] = []; // Notas filtradas
+  searchTerm: string = '';    // Termo de pesquisa
   noteToEdit: any = null;  // Variável para armazenar a nota que será editada
 
   constructor(private noteService: NoteService) {}
@@ -18,12 +20,14 @@ export class NoteListComponent implements OnInit {
 
   loadNotes() {
     this.notes = this.noteService.getAll();
+    this.filteredNotes = this.notes;
   }
 
   // Método para excluir uma nota
   delete(index: number) {
     this.noteService.delete(index);
     this.loadNotes();  // Recarregar a lista após exclusão
+    this.filterNotes();
   }
 
   // Método para iniciar a edição de uma nota
@@ -44,6 +48,17 @@ export class NoteListComponent implements OnInit {
       this.noteService.update(index, this.noteToEdit);  // Atualizar a nota no serviço
       this.loadNotes();  // Recarregar a lista após a atualização
       this.noteToEdit = null;  // Limpar a nota em edição
+    }
+  }
+
+  filterNotes() {
+    if (this.searchTerm) {
+      this.filteredNotes = this.notes.filter(note =>
+        note.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        note.content.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      this.filteredNotes = this.notes; // Exibe todas se o termo de pesquisa estiver vazio
     }
   }
 }

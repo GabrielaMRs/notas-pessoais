@@ -1,5 +1,21 @@
+<div class="filter-container">
+  <label for="search">Buscar Notas:</label>
+  <input
+    id="search"
+    type="text"
+    [(ngModel)]="searchTerm"
+    placeholder="Digite para buscar..."
+  />
+  <button (click)="filterNotes()">Buscar</button>
+</div>
+
 <div class="note-list">
-  <div class="note-card" *ngFor="let note of notes; let i = index">
+   <!-- Caso não tenha nenhuma nota filtrada -->
+  <div *ngIf="filteredNotes.length === 0" class="no-results-message">
+    Nenhuma nota encontrada com este filtro.
+  </div>
+
+  <div class="note-card" *ngFor="let note of filteredNotes; let i = index">
     <div class="note-card-title">{{ note.title }}</div>
     <div class="note-card-content">{{ note.content }}</div>
     <div class="note-card-buttons">
