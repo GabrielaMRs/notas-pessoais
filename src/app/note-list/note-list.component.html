@@ -1,5 +1,5 @@
 <div class="filter-container">
-  <label for="search">Buscar Notas:  </label>
+  <label for="search">Buscar Notas:</label>
   <input
     id="search"
     type="text"
@@ -10,28 +10,29 @@
 </div>
 
 <div class="note-list">
-   <!-- Caso não tenha nenhuma nota filtrada -->
   <div *ngIf="filteredNotes.length === 0" class="no-results-message">
     Nenhuma nota encontrada com este filtro.
   </div>
 
   <div class="note-card" *ngFor="let note of filteredNotes; let i = index">
-    <div class="note-card-title">{{ note.title }}</div>
-    <div class="note-card-content">{{ note.content }}</div>
-    <div class="note-card-buttons">
-      <button class="edit-btn" (click)="edit(i)">Editar</button>
-      <button class="delete-btn" (click)="delete(i)">Excluir</button>
+    <div *ngIf="noteToEditIndex !== i">
+      <div class="note-card-title">{{ note.title }}</div>
+      <div class="note-card-content">{{ note.content }}</div>
+      <div class="note-card-buttons">
+        <button class="edit-btn" (click)="edit(i)">Editar</button>
+        <button class="delete-btn" (click)="delete(i)">Excluir</button>
+      </div>
     </div>
 
-    <!-- Formulário de edição (exibido se a nota estiver em modo de edição) -->
-    <div *ngIf="noteToEdit?.id === note.id" class="note-edit-form">
+    <!-- Formulário de edição exibido apenas para a nota em edição -->
+    <div *ngIf="noteToEditIndex === i" class="note-edit-form">
       <h3>Editar Nota</h3>
       <form (ngSubmit)="saveEdit()">
         <label for="edit-title">Título:</label>
-        <input id="edit-title" type="text" [(ngModel)]="noteToEdit.title" name="title" required />
+        <input id="edit-title" type="text" [(ngModel)]="note.title" name="title" required />
 
         <label for="edit-content">Conteúdo:</label>
-        <textarea id="edit-content" [(ngModel)]="noteToEdit.content" name="content" required></textarea>
+        <textarea id="edit-content" [(ngModel)]="note.content" name="content" required></textarea>
 
         <button type="submit" class="edit-save-btn">Salvar</button>
         <button type="button" class="edit-cancel-btn" (click)="cancelEdit()">Cancelar</button>

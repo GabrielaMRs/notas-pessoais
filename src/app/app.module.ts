@@ -1,7 +1,7 @@
 // src/app/app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NoteFormComponent } from './note-form/note-form.component';
@@ -16,7 +16,8 @@ import { NoteService } from './note.service';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [NoteService],
   bootstrap: [AppComponent]

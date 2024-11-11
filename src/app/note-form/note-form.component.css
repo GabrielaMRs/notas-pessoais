@@ -74,6 +74,12 @@ button[type="button"]:hover {
   background-color: #c82333;
 }
 
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
 /* Responsividade */
 @media (max-width: 600px) {
   form {
